@@ -18,6 +18,7 @@ import './App.css';
 import UserProfile from './components/UserProfile';
 import Bookmakers from './components/Bookmakers';
 import Bets from './components/Bets';
+import Finance from './components/Finance';
 import Drawer from './components/styleguide/drawer';
 import AppContainer from './containers/AppContainer';
 
@@ -32,12 +33,12 @@ function App() {
                         <ListItemText primary="Profile" />
                   </ListItem>
               </Link>
-              <ListItem button>
-                  {/* <Link to={'/suivis'}> */}
+              <Link to={'/progression'}>
+                  <ListItem button>
                       <ListItemIcon><AttachMoney /></ListItemIcon>
-                      <ListItemText primary="Suivis" />
-                  {/* </Link> */}
-              </ListItem>
+                      <ListItemText primary="Progression" />
+                  </ListItem>
+              </Link>
           </List>
           <Divider />
           <List>
@@ -72,6 +73,7 @@ function App() {
                       <Route exact path="/" component={UserProfile} />
                       <Route path="/bookmakers" component={Bookmakers} />
                       <Route path="/paris" component={Bets} />
+                      <Route path="/progression" component={Finance} />
                       {/* <Route path="/topics" component={Topics} /> */}
                   </Drawer>
               </Router>

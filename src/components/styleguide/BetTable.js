@@ -55,7 +55,7 @@ function BetTable(
         bet.details.team1,
         bet.details.team2,
         bet.details.amount,
-        bet.details.result,
+        bet.details.result === 'win' ? '✅' : '❌',
         bet.details.cote1,
         moment(bet.date).fromNow()
     ]);

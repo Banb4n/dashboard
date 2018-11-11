@@ -36,8 +36,6 @@ function Bets(props: { user: Object }) {
     }
 
     const onCloseBetDetails = () => setCurrentBet(null);
-
-    const currentCote = currentBet && getCurrentCote(currentBet.details.choice);
     
     return (
         <div className="userProfile">
@@ -59,11 +57,16 @@ function Bets(props: { user: Object }) {
                         <CardContent>
                             <p>{currentBet.details.team1} vs {currentBet.details.team2}</p>
                             <ul className="margin-s100" style={{ textAlign: 'left' }}>
-                                <li>Cote: {`${currentBet.details[currentCote]} ${currentBet.details[currentCote] >= 2 ? '🔥' : null}`}</li>
-                                <li>Gagne: {currentBet.details.result ? '✅' : '❌'}</li>
+                                <li>Cote: {`${getCurrentCote(currentBet)} ${getCurrentCote(currentBet) >= 2 ? '🔥' : ''}`}</li>
+                                <li>Gagne: {currentBet.details.result === 'win' ? '✅' : '❌'}</li>
                                 <li>Joué {currentBet.details.amount} euros</li>
                                 {currentBet.details.result ? (
-                                    <li>💸: + {currentBet.details.profit} euros</li>
+                                    <li>
+                                        {currentBet.details.profit > 0 ? 
+                                            `Profit 💸: + ${currentBet.details.profit} euros` :
+                                            `Perd 😭: - ${currentBet.details.amount} euros` 
+                                        }
+                                    </li>
                                 ) : null}
                             </ul>
                         </CardContent>

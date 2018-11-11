@@ -8,7 +8,7 @@ type AppState = {
   
 class AppContainer extends Container<AppState> {
     state = {
-        user: db.users[0]
+        user: db.users[1]
     };
   
     addUser(user: Object) {

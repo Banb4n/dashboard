@@ -1,11 +1,11 @@
-function getCurrentCote(choice: 0 | 1 | 2) {
-    switch(choice) {
+function getCurrentCote(bet: Object) {
+    switch(bet.choice) {
         case 1:
-            return 'coteN';
+            return bet.details.coteN;
         case 3:
-            return 'cote2';
+            return bet.details.cote2;
         default:
-            return 'cote1';
+            return bet.details.cote1;
     }
 }
 
