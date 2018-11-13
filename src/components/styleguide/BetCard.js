@@ -14,8 +14,7 @@ function BetCard(props: {
 
     const STYLES = {
         cardContainer: {
-            flex: '0 1 50%',
-            margin: '16px 0 16px 16px'
+            padding: 24
         },
         teamName: {
             fontSize: 24

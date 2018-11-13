@@ -42,3 +42,7 @@
 .padding-s200 {
   padding: 16px;
 }
+
+.floating-button {
+  z-index: 5;
+}
