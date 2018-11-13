@@ -65,7 +65,7 @@ function Bets(props: { bets: Object }) {
                 <ControlPoint style={{ marginRight: 4 }} />
                 Nouveau Pari
             </FloatingButton>
-            <BetsHeader />
+            <BetsHeader bets={bets} />
             <BetTable bets={bets} onClick={onBetClick} tableOptions={null} />
             {currentBet && (
                 <React.Fragment>
