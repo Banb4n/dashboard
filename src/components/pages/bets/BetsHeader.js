@@ -36,13 +36,37 @@ const STYLES = StyleSheet.create({
         padding: `0 ${spacing.S200}px`
     },
     betDetailsItem: {
+        margin: 3,
+        padding: 4,
+        paddingLeft: spacing.S100,
+        marginLeft: spacing.S200,
         fontSize: 16,
         fontFamilly: 'Open Sans, sans-serif',
         color: 'dimgrey'
     },
+    betItemSecondary: {
+        padding: 4,
+        marginLeft: spacing.S200,
+        paddingLeft: spacing.S100,
+        borderLeft: '1px solid dimgrey'
+    },
+    betItemPrimary: {
+        padding: 4,
+        borderLeft: '1px solid dimgrey',
+        paddingLeft: spacing.S100
+    },
+    betDetailsHeader: {
+        padding: 2,
+        marginTop: 3,
+        marginLeft: -10,
+        marginBottom: 2,
+        fontSize: 20,
+        fontFamilly: 'Open Sans, sans-serif',
+        color: 'dimgrey'
+    },
     betDetailsValue: {
-        fontWeight: 500,
-        fontSize: 18,
+        fontWeight: 700,
+        fontSize: 17,
         color: 'black'
     },
     STATS: {
@@ -69,20 +93,36 @@ function BetsHeader(props: { bets: Object }) {
                 <h1 className={css(STYLES.pageTitle)}>Mes paris</h1>
                 <View styles={STYLES.betsDetailsContainer}>
                     <View styles={STYLES.betDetails}>
-                        <p className={css(STYLES.betDetailsItem)}>
+                        <p className={css(STYLES.betDetailsHeader)}>Total :</p>
+                        <p
+                            className={css(
+                                STYLES.betDetailsItem,
+                                STYLES.betItemPrimary
+                            )}
+                        >
                             <span className={css(STYLES.betDetailsValue)}>
                                 {betsCount}
                             </span>{' '}
                             paris
                         </p>
                         <p className={css(STYLES.betDetailsItem)}>
-                            <span className={css(STYLES.betDetailsValue)}>
+                            <span
+                                className={css(
+                                    STYLES.betDetailsValue,
+                                    STYLES.betItemSecondary
+                                )}
+                            >
                                 {winsCount}
                             </span>{' '}
                             gagnant
                         </p>
                         <p className={css(STYLES.betDetailsItem)}>
-                            <span className={css(STYLES.betDetailsValue)}>
+                            <span
+                                className={css(
+                                    STYLES.betDetailsValue,
+                                    STYLES.betItemSecondary
+                                )}
+                            >
                                 {loosesCount}
                             </span>{' '}
                             perdant
