@@ -3,7 +3,7 @@ function getProfit(bets) {
 
     bets.forEach(bet => {
         const { profit } = bet.details;
-        if (profit) { 
+        if (profit) {
             profitList.push(profit);
         } else {
             profitList.push(0);

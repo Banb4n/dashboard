@@ -11,6 +11,6 @@ const bookmakers = [
         uid: 'bookmaker3',
         name: 'unibet'
     }
-]
+];
 
 export default bookmakers;

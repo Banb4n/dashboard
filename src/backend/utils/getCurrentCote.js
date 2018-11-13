@@ -1,5 +1,5 @@
 function getCurrentCote(bet: Object) {
-    switch(bet.choice) {
+    switch (bet.choice) {
         case 1:
             return bet.details.coteN;
         case 3:
