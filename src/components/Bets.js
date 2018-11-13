@@ -1,5 +1,5 @@
 /* @flow */
-import React, { useState } from 'react';
+import * as React from 'react';
 import { Subscribe } from 'unstated';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -10,9 +10,9 @@ import AppContainer from '../containers/AppContainer';
 import getCurrentCote from '../backend/utils/getCurrentCote';
 import { BetCard } from './styleguide';
 
-function Bets(props: { user: Object }) {
-    const { bets } = props.user;
-    const [currentBet, setCurrentBet] = useState(null);
+function Bets(props: { bets: Object }) {
+    const { bets } = props;
+    const [currentBet, setCurrentBet] = React.useState(null);
 
     const onBetClick = (
         rowData: Array<String>,
@@ -24,13 +24,9 @@ function Bets(props: { user: Object }) {
         const betUID = rowData[0];
 
         if (betUID) {
-            getBetDetails(betUID);
+            const bet = bets.filter(bet => bet.uid === betUID);
+            setCurrentBet(bet[0]);
         }
-    };
-
-    const getBetDetails = (betID: string) => {
-        const bet = bets.filter(bet => bet.uid === betID);
-        setCurrentBet(bet[0]);
     };
 
     const onCloseBetDetails = () => setCurrentBet(null);
@@ -48,7 +44,10 @@ function Bets(props: { user: Object }) {
                     className="padding-100"
                 >
                     <CardContent>
-                        <h2>Ajouter un nouveau paris</h2>
+                        <h2>Mes paris</h2>
+                        <div>
+                            <p />
+                        </div>
                     </CardContent>
                     <CardActions>
                         <Button size="small">Ajouter</Button>
@@ -63,7 +62,9 @@ function Bets(props: { user: Object }) {
 
 const BetsConnected = (props: any) => (
     <Subscribe to={[AppContainer]}>
-        {appContainer => <Bets user={appContainer.state.user} {...props} />}
+        {appContainer => (
+            <Bets bets={appContainer.state.user.bets} {...props} />
+        )}
     </Subscribe>
 );
 
