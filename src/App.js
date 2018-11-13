@@ -12,10 +12,10 @@ import AttachMoney from '@material-ui/icons/AttachMoney';
 import TableChart from '@material-ui/icons/TableChart';
 
 import './App.css';
-import UserProfile from './components/UserProfile';
+import UserProfile from './components/pages/user/UserProfile';
 import Bookmakers from './components/Bookmakers';
-import Bets from './components/Bets';
-import Finance from './components/Finance';
+import Bets from './components/pages/bets/Bets';
+import Finance from './components/pages/finance/Finance';
 import { Drawer } from './components/styleguide';
 import ROUTES from './routes';
 

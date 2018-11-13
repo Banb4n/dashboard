@@ -1,6 +1,6 @@
-import UserProfile from '../components/UserProfile';
-import Bets from '../components/Bets';
-import Finance from '../components/Finance';
+import UserProfile from '../components/pages/user/UserProfile';
+import Bets from '../components/pages/bets/Bets';
+import Finance from '../components/pages/finance/Finance';
 
 const ROUTES = [
     {

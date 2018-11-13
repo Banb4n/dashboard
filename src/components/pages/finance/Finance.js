@@ -3,14 +3,10 @@ import * as React from 'react';
 import { Subscribe } from 'unstated';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Button from '@material-ui/core/Button';
-import MUIDataTable from 'mui-datatables';
-import BetTable from './styleguide/BetTable';
-import AppContainer from '../containers/AppContainer';
-import getTotalAmount from '../backend/utils/getTotalAmount';
-import getProfit from '../backend/utils/getProfit';
-import getLooses from '../backend/utils/getLooses';
+import AppContainer from '../../../containers/AppContainer';
+import getTotalAmount from '../../../backend/utils/getTotalAmount';
+import getProfit from '../../../backend/utils/getProfit';
+import getLooses from '../../../backend/utils/getLooses';
 
 function Finance(props: { user: Object }) {
     const { user } = props;
