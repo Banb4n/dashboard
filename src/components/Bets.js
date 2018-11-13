@@ -1,14 +1,27 @@
 /* @flow */
 import * as React from 'react';
 import { Subscribe } from 'unstated';
+import { StyleSheet, css } from 'aphrodite-jss';
 import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import ControlPoint from '@material-ui/icons/ControlPoint';
 import BetTable from './styleguide/BetTable';
 import AppContainer from '../containers/AppContainer';
-import { BetCard, Modal } from './styleguide';
+import { BetCard, Modal, View, FloatingButton } from './styleguide';
+import { spacing } from './styleguide/css';
+
+const STYLES = StyleSheet.create({
+    betsHeader: {
+        width: '100%',
+        padding: spacing.S400,
+        display: 'flex'
+    },
+    pageTitle: {
+        fontSize: 32,
+        color: 'grey',
+        fontFamily: "'Open Sans', sans-serif"
+    }
+});
 
 function Bets(props: { bets: Object }) {
     const { bets } = props;
@@ -62,40 +75,22 @@ function Bets(props: { bets: Object }) {
 
     return (
         <div className="userProfile">
-            <Button
-                variant="extendedFab"
-                aria-label="Delete"
-                className="floating-button"
-                style={{
-                    margin: 24,
-                    position: 'fixed',
-                    bottom: '0%',
-                    right: '0%'
-                }}
-                onClick={onOpenFormModal}
-            >
+            <FloatingButton onClick={onOpenFormModal}>
                 <ControlPoint style={{ marginRight: 4 }} />
                 Nouveau Pari
-            </Button>
+            </FloatingButton>
             <div
                 style={{
                     display: 'flex',
                     justifyContent: 'space-between'
                 }}
             >
-                <Card style={{ flex: '0 1 100%' }} className="padding-100">
-                    <CardContent>
-                        <h1 style={{ textAlign: 'center' }}>Mes paris</h1>
-                        <div>
-                            <p />
-                        </div>
-                    </CardContent>
-                    <CardActions>
-                        <Button size="small" onClick={onOpenFormModal}>
-                            Ajouter
-                        </Button>
-                    </CardActions>
-                </Card>
+                <View styles={[STYLES.betsHeader]}>
+                    <h1 className={css(STYLES.pageTitle)}>Mes paris</h1>
+                    <div>
+                        <p />
+                    </div>
+                </View>
                 {currentBet && (
                     <React.Fragment>
                         <Modal isOpen={!!currentBet} onClose={onClose}>
