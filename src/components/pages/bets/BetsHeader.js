@@ -8,7 +8,8 @@ import { spacing } from '../../styleguide/css';
 import {
     getLoosesCount,
     getWinsCount,
-    getBetsCount
+    getBetsCount,
+    getFavoriteSport
 } from '../../../backend/utils';
 
 const STYLES = StyleSheet.create({
@@ -24,16 +25,16 @@ const STYLES = StyleSheet.create({
     },
     betsDetailsContainer: {
         margin: spacing.S100,
-        backgroundColor: 'rgba(0,0,0,0.1)',
         borderRadius: 2,
-        padding: `${spacing.S100}px ${spacing.S200}px`,
+        padding: `${spacing.S100}px ${spacing.S100}px`,
         display: 'flex',
-        justifyContent: 'space-around'
+        justifyContent: 'space-between'
     },
     betDetails: {
         flex: '0 1 45%',
         textAlign: 'left',
-        padding: `0 ${spacing.S200}px`
+        display: 'flex',
+        justifyContent: 'space-around'
     },
     betDetailsItem: {
         margin: 3,
@@ -58,8 +59,7 @@ const STYLES = StyleSheet.create({
     betDetailsHeader: {
         padding: 2,
         marginTop: 3,
-        marginLeft: -10,
-        marginBottom: 2,
+        marginBottom: 4,
         fontSize: 20,
         fontFamilly: 'Open Sans, sans-serif',
         color: 'dimgrey'
@@ -68,6 +68,13 @@ const STYLES = StyleSheet.create({
         fontWeight: 700,
         fontSize: 17,
         color: 'black'
+    },
+    divider: {
+        width: 1,
+        background: 'dimgrey',
+        display: 'flex',
+        margin: 16,
+        borderRadius: 10
     },
     STATS: {
         flex: '0 1 45%',
@@ -87,46 +94,67 @@ function BetsHeader(props: { bets: Object }) {
     const winsCount = getWinsCount(bets);
     const betsCount = getBetsCount(bets);
 
+    console.log(getFavoriteSport(bets));
+
     return (
         <div className="betsHeader">
             <View styles={STYLES.betsHeader}>
                 <h1 className={css(STYLES.pageTitle)}>Mes paris</h1>
                 <View styles={STYLES.betsDetailsContainer}>
                     <View styles={STYLES.betDetails}>
-                        <p className={css(STYLES.betDetailsHeader)}>Total :</p>
-                        <p
-                            className={css(
-                                STYLES.betDetailsItem,
-                                STYLES.betItemPrimary
-                            )}
-                        >
-                            <span className={css(STYLES.betDetailsValue)}>
-                                {betsCount}
-                            </span>{' '}
-                            paris
-                        </p>
-                        <p className={css(STYLES.betDetailsItem)}>
-                            <span
+                        <View>
+                            <p className={css(STYLES.betDetailsHeader)}>
+                                Total :
+                            </p>
+                            <p
                                 className={css(
-                                    STYLES.betDetailsValue,
-                                    STYLES.betItemSecondary
+                                    STYLES.betDetailsItem,
+                                    STYLES.betItemPrimary
                                 )}
                             >
-                                {winsCount}
-                            </span>{' '}
-                            gagnant
-                        </p>
-                        <p className={css(STYLES.betDetailsItem)}>
-                            <span
-                                className={css(
-                                    STYLES.betDetailsValue,
-                                    STYLES.betItemSecondary
-                                )}
+                                <span className={css(STYLES.betDetailsValue)}>
+                                    {betsCount}
+                                </span>{' '}
+                                paris
+                            </p>
+                            <p
+                                className={css(STYLES.betDetailsItem)}
+                                style={{ color: 'green' }}
                             >
-                                {loosesCount}
-                            </span>{' '}
-                            perdant
-                        </p>
+                                <span
+                                    className={css(
+                                        STYLES.betDetailsValue,
+                                        STYLES.betItemSecondary
+                                    )}
+                                >
+                                    {winsCount}
+                                </span>{' '}
+                                gagnant
+                            </p>
+                            <p
+                                className={css(STYLES.betDetailsItem)}
+                                style={{ color: 'red' }}
+                            >
+                                <span
+                                    className={css(
+                                        STYLES.betDetailsValue,
+                                        STYLES.betItemSecondary
+                                    )}
+                                >
+                                    {loosesCount}
+                                </span>{' '}
+                                perdant
+                            </p>
+                        </View>
+                        <View styles={STYLES.divider} />
+                        <View>
+                            <p className={css(STYLES.betDetailsItem)}>
+                                <span className={css(STYLES.betDetailsValue)}>
+                                    {betsCount}
+                                </span>{' '}
+                                paris
+                            </p>
+                        </View>
                     </View>
                     <View styles={STYLES.STATS}>STATS</View>
                 </View>

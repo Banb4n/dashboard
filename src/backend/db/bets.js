@@ -6,7 +6,7 @@ const bets = {
         {
             uid: 'bet1',
             bookmaker: 'zebet',
-            type: [sports[1].name],
+            type: sports[1].uid,
             date: moment().format('L'),
             details: {
                 team1: 'G. Monfils',
@@ -24,7 +24,7 @@ const bets = {
         {
             uid: 'bet2',
             bookmaker: 'zebet',
-            type: [sports[0].name],
+            type: sports[0].uid,
             date: moment().format('L'),
             details: {
                 team1: 'Marseille',
@@ -44,7 +44,7 @@ const bets = {
         {
             uid: 'bet1',
             bookmaker: 'betclic',
-            type: [sports[0].name],
+            type: sports[0].uid,
             date: moment().format('L'),
             details: {
                 team1: 'Real Madrid',
@@ -62,7 +62,7 @@ const bets = {
         {
             uid: 'bet2',
             bookmaker: 'zebet',
-            type: [sports[1].name],
+            type: sports[1].uid,
             date: moment().format('L'),
             details: {
                 team1: 'G. Monfils',
@@ -80,7 +80,7 @@ const bets = {
         {
             uid: 'bet3',
             bookmaker: 'zebet',
-            type: [sports[0].name],
+            type: sports[0].uid,
             date: moment().format('L'),
             details: {
                 team1: 'Marseille',
@@ -98,7 +98,7 @@ const bets = {
         {
             uid: 'bet4',
             bookmaker: 'betclic',
-            type: [sports[0].name],
+            type: sports[0].uid,
             date: moment().format('L'),
             details: {
                 team1: 'Real Madrid',
@@ -116,7 +116,7 @@ const bets = {
         {
             uid: 'bet5',
             bookmaker: 'zebet',
-            type: [sports[1].name],
+            type: sports[1].uid,
             date: moment().format('L'),
             details: {
                 team1: 'G. Monfils',
@@ -134,7 +134,7 @@ const bets = {
         {
             uid: 'bet6',
             bookmaker: 'zebet',
-            type: [sports[0].name],
+            type: sports[0].uid,
             date: moment().format('L'),
             details: {
                 team1: 'Marseille',
@@ -152,7 +152,7 @@ const bets = {
         {
             uid: 'bet7',
             bookmaker: 'betclic',
-            type: [sports[0].name],
+            type: sports[0].uid,
             date: moment().format('L'),
             details: {
                 team1: 'Real Madrid',
@@ -170,7 +170,7 @@ const bets = {
         {
             uid: 'bet8',
             bookmaker: 'zebet',
-            type: [sports[1].name],
+            type: sports[1].uid,
             date: moment().format('L'),
             details: {
                 team1: 'G. Monfils',
@@ -188,7 +188,7 @@ const bets = {
         {
             uid: 'bet9',
             bookmaker: 'zebet',
-            type: [sports[0].name],
+            type: sports[0].uid,
             date: moment().format('L'),
             details: {
                 team1: 'Marseille',
@@ -206,7 +206,7 @@ const bets = {
         {
             uid: 'bet10',
             bookmaker: 'betclic',
-            type: [sports[0].name],
+            type: sports[0].uid,
             date: moment().format('L'),
             details: {
                 team1: 'Real Madrid',
@@ -224,7 +224,7 @@ const bets = {
         {
             uid: 'bet11',
             bookmaker: 'zebet',
-            type: [sports[1].name],
+            type: sports[1].uid,
             date: moment().format('L'),
             details: {
                 team1: 'G. Monfils',
@@ -242,7 +242,7 @@ const bets = {
         {
             uid: 'bet12',
             bookmaker: 'zebet',
-            type: [sports[0].name],
+            type: sports[0].uid,
             date: moment().format('L'),
             details: {
                 team1: 'Marseille',
