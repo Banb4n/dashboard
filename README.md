@@ -1,4 +1,9 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with : 
+  - [Create React App](https://github.com/facebook/create-react-app)
+  - [PieChart(http://recharts.org/en-US/api/PieChart)
+  - [Trianglify](https://trianglify.io/)
+  - [Moment](https://momentjs.com/docs/#/i18n/changing-locale/)
+  - [Material UI](https://material-ui.com)
 
 ## Available Scripts
 
