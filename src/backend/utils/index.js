@@ -16,32 +16,22 @@ function getBetsCount(bets) {
     return bets.length;
 }
 
-/**
- *
- * TO DO: finish this algo
- */
 function getFavoriteSport(bets) {
     const filteredBets = {};
     sports.forEach(sport => {
         filteredBets[sport.name] = bets.filter(bet => bet.type === sport.uid);
     });
-    console.log({ test: filteredBets.football });
 
     const filteredBetsCount = [];
-    Object.keys(filteredBets, key =>
+    Object.keys(filteredBets).forEach(key =>
         filteredBetsCount.push(filteredBets[key].length)
     );
-    // const result = filteredBets.map(item => item.values().length);
-    const maxCountSport = Math.max.apply(null, filteredBetsCount);
-    console.log({ maxCountSport });
 
-    Object.keys(filteredBets, key => {
-        console.log({ key });
-        // if (value.length === maxCountSport) {
-        //     console.log({ value });
-        //     // return sports[item.name];
-        // }
-    });
+    const favoriteSportCount = Math.max.apply(null, filteredBetsCount);
+
+    return Object.keys(filteredBets).filter(
+        key => filteredBets[key].length === favoriteSportCount
+    );
 
     // return loosesBets.length;
 }

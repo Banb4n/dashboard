@@ -93,8 +93,7 @@ function BetsHeader(props: { bets: Object }) {
     const loosesCount = getLoosesCount(bets);
     const winsCount = getWinsCount(bets);
     const betsCount = getBetsCount(bets);
-
-    console.log(getFavoriteSport(bets));
+    const favoriteSport = getFavoriteSport(bets);
 
     return (
         <div className="betsHeader">
@@ -149,10 +148,10 @@ function BetsHeader(props: { bets: Object }) {
                         <View styles={STYLES.divider} />
                         <View>
                             <p className={css(STYLES.betDetailsItem)}>
+                                Sport favoris:{' '}
                                 <span className={css(STYLES.betDetailsValue)}>
-                                    {betsCount}
-                                </span>{' '}
-                                paris
+                                    {favoriteSport}
+                                </span>
                             </p>
                         </View>
                     </View>
