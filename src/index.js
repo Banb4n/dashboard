@@ -1,9 +1,13 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import momentConf from './moment-conf';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+// Setup moment in FR
+momentConf();
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

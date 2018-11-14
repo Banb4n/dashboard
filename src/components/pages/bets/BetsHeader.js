@@ -9,7 +9,10 @@ import {
     getLoosesCount,
     getWinsCount,
     getBetsCount,
-    getFavoriteSport
+    getFavoriteSport,
+    getAverageCote,
+    getLastWin,
+    getLastLoose
 } from '../../../backend/utils';
 
 const STYLES = StyleSheet.create({
@@ -39,9 +42,8 @@ const STYLES = StyleSheet.create({
     betDetailsItem: {
         margin: 3,
         padding: 4,
-        paddingLeft: spacing.S100,
-        marginLeft: spacing.S200,
-        fontSize: 16,
+        paddingLeft: spacing.S200,
+        fontSize: 15,
         fontFamilly: 'Open Sans, sans-serif',
         color: 'dimgrey'
     },
@@ -65,15 +67,14 @@ const STYLES = StyleSheet.create({
         color: 'dimgrey'
     },
     betDetailsValue: {
-        fontWeight: 700,
-        fontSize: 17,
+        fontWeight: 600,
         color: 'black'
     },
     divider: {
         width: 1,
         background: 'dimgrey',
         display: 'flex',
-        margin: 16,
+        margin: 20,
         borderRadius: 10
     },
     STATS: {
@@ -94,6 +95,9 @@ function BetsHeader(props: { bets: Object }) {
     const winsCount = getWinsCount(bets);
     const betsCount = getBetsCount(bets);
     const favoriteSport = getFavoriteSport(bets);
+    const averageCote = getAverageCote(bets);
+    const lastWin = getLastWin(bets);
+    const lastLoose = getLastLoose(bets);
 
     return (
         <div className="betsHeader">
@@ -105,12 +109,7 @@ function BetsHeader(props: { bets: Object }) {
                             <p className={css(STYLES.betDetailsHeader)}>
                                 Total :
                             </p>
-                            <p
-                                className={css(
-                                    STYLES.betDetailsItem,
-                                    STYLES.betItemPrimary
-                                )}
-                            >
+                            <p className={css(STYLES.betDetailsItem)}>
                                 <span className={css(STYLES.betDetailsValue)}>
                                     {betsCount}
                                 </span>{' '}
@@ -120,12 +119,7 @@ function BetsHeader(props: { bets: Object }) {
                                 className={css(STYLES.betDetailsItem)}
                                 style={{ color: 'green' }}
                             >
-                                <span
-                                    className={css(
-                                        STYLES.betDetailsValue,
-                                        STYLES.betItemSecondary
-                                    )}
-                                >
+                                <span className={css(STYLES.betDetailsValue)}>
                                     {winsCount}
                                 </span>{' '}
                                 gagnant
@@ -134,12 +128,7 @@ function BetsHeader(props: { bets: Object }) {
                                 className={css(STYLES.betDetailsItem)}
                                 style={{ color: 'red' }}
                             >
-                                <span
-                                    className={css(
-                                        STYLES.betDetailsValue,
-                                        STYLES.betItemSecondary
-                                    )}
-                                >
+                                <span className={css(STYLES.betDetailsValue)}>
                                     {loosesCount}
                                 </span>{' '}
                                 perdant
@@ -148,9 +137,27 @@ function BetsHeader(props: { bets: Object }) {
                         <View styles={STYLES.divider} />
                         <View>
                             <p className={css(STYLES.betDetailsItem)}>
-                                Sport favoris:{' '}
+                                Favoris:{' '}
                                 <span className={css(STYLES.betDetailsValue)}>
                                     {favoriteSport}
+                                </span>
+                            </p>
+                            <p className={css(STYLES.betDetailsItem)}>
+                                Cote moyenne:{' '}
+                                <span className={css(STYLES.betDetailsValue)}>
+                                    {averageCote}
+                                </span>
+                            </p>
+                            <p className={css(STYLES.betDetailsItem)}>
+                                Derniere victoire:{' '}
+                                <span className={css(STYLES.betDetailsValue)}>
+                                    {lastWin}
+                                </span>
+                            </p>
+                            <p className={css(STYLES.betDetailsItem)}>
+                                Derniere défaite:{' '}
+                                <span className={css(STYLES.betDetailsValue)}>
+                                    {lastLoose}
                                 </span>
                             </p>
                         </View>

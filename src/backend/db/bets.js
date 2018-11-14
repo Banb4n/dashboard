@@ -1,4 +1,3 @@
-import moment from 'moment';
 import sports from './sports';
 
 const bets = {
@@ -7,7 +6,7 @@ const bets = {
             uid: 'bet1',
             bookmaker: 'zebet',
             type: sports[1].uid,
-            date: moment().format('L'),
+            date: '12 novembre 2018 12:00',
             details: {
                 team1: 'G. Monfils',
                 team2: 'R. Federer',
@@ -25,7 +24,7 @@ const bets = {
             uid: 'bet2',
             bookmaker: 'zebet',
             type: sports[0].uid,
-            date: moment().format('L'),
+            date: '12 novembre 2018 12:00',
             details: {
                 team1: 'Marseille',
                 team2: 'OL',
@@ -45,7 +44,7 @@ const bets = {
             uid: 'bet1',
             bookmaker: 'betclic',
             type: sports[0].uid,
-            date: moment().format('L'),
+            date: '14 novembre 2018 19:58',
             details: {
                 team1: 'Real Madrid',
                 team2: 'PSG',
@@ -63,7 +62,7 @@ const bets = {
             uid: 'bet2',
             bookmaker: 'zebet',
             type: sports[1].uid,
-            date: moment().format('L'),
+            date: '12 novembre 2018 17:58',
             details: {
                 team1: 'G. Monfils',
                 team2: 'R. Federer',
@@ -81,7 +80,7 @@ const bets = {
             uid: 'bet3',
             bookmaker: 'zebet',
             type: sports[0].uid,
-            date: moment().format('L'),
+            date: '12 novembre 2018 12:00',
             details: {
                 team1: 'Marseille',
                 team2: 'OL',
@@ -99,7 +98,7 @@ const bets = {
             uid: 'bet4',
             bookmaker: 'betclic',
             type: sports[0].uid,
-            date: moment().format('L'),
+            date: '8 novembre 2018 11:58',
             details: {
                 team1: 'Real Madrid',
                 team2: 'PSG',
@@ -117,7 +116,7 @@ const bets = {
             uid: 'bet5',
             bookmaker: 'zebet',
             type: sports[1].uid,
-            date: moment().format('L'),
+            date: '10 octobre 2018 19:59',
             details: {
                 team1: 'G. Monfils',
                 team2: 'R. Federer',
@@ -135,7 +134,7 @@ const bets = {
             uid: 'bet6',
             bookmaker: 'zebet',
             type: sports[0].uid,
-            date: moment().format('L'),
+            date: '6 octobre 2018 19:08',
             details: {
                 team1: 'Marseille',
                 team2: 'OL',
@@ -153,7 +152,7 @@ const bets = {
             uid: 'bet7',
             bookmaker: 'betclic',
             type: sports[0].uid,
-            date: moment().format('L'),
+            date: '22 septembre 2018 20:58',
             details: {
                 team1: 'Real Madrid',
                 team2: 'PSG',
@@ -171,7 +170,7 @@ const bets = {
             uid: 'bet8',
             bookmaker: 'zebet',
             type: sports[1].uid,
-            date: moment().format('L'),
+            date: '10 septembre 2018 19:58',
             details: {
                 team1: 'G. Monfils',
                 team2: 'R. Federer',
@@ -189,9 +188,9 @@ const bets = {
             uid: 'bet9',
             bookmaker: 'zebet',
             type: sports[0].uid,
-            date: moment().format('L'),
+            date: '1 septembre 2018 19:58',
             details: {
-                team1: 'Marseille',
+                team1: 'titi',
                 team2: 'OL',
                 cote1: 1.6,
                 coteN: 2.1,
@@ -207,7 +206,7 @@ const bets = {
             uid: 'bet10',
             bookmaker: 'betclic',
             type: sports[0].uid,
-            date: moment().format('L'),
+            date: '31 april 2018 19:58',
             details: {
                 team1: 'Real Madrid',
                 team2: 'PSG',
@@ -225,7 +224,7 @@ const bets = {
             uid: 'bet11',
             bookmaker: 'zebet',
             type: sports[1].uid,
-            date: moment().format('L'),
+            date: '9 mars 2017 20:58',
             details: {
                 team1: 'G. Monfils',
                 team2: 'R. Federer',
@@ -243,7 +242,7 @@ const bets = {
             uid: 'bet12',
             bookmaker: 'zebet',
             type: sports[0].uid,
-            date: moment().format('L'),
+            date: '10 janvier 2016 20:58',
             details: {
                 team1: 'Marseille',
                 team2: 'OL',
