@@ -3,7 +3,7 @@ import * as React from 'react';
 import { StyleSheet, css } from 'aphrodite-jss';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
-import { View } from '../../styleguide';
+import { View, Text } from '../../styleguide';
 import { spacing } from '../../styleguide/css';
 import {
     getLoosesCount,
@@ -42,10 +42,7 @@ const STYLES = StyleSheet.create({
     betDetailsItem: {
         margin: 3,
         padding: 4,
-        paddingLeft: spacing.S200,
-        fontSize: 15,
-        fontFamilly: 'Open Sans, sans-serif',
-        color: 'dimgrey'
+        paddingLeft: spacing.S200
     },
     betItemSecondary: {
         padding: 4,
@@ -109,57 +106,57 @@ function BetsHeader(props: { bets: Object }) {
                             <p className={css(STYLES.betDetailsHeader)}>
                                 Total :
                             </p>
-                            <p className={css(STYLES.betDetailsItem)}>
+                            <Text styles={STYLES.betDetailsItem}>
                                 <span className={css(STYLES.betDetailsValue)}>
                                     {betsCount}
                                 </span>{' '}
                                 paris
-                            </p>
-                            <p
-                                className={css(STYLES.betDetailsItem)}
+                            </Text>
+                            <Text
+                                styles={STYLES.betDetailsItem}
                                 style={{ color: 'green' }}
                             >
                                 <span className={css(STYLES.betDetailsValue)}>
                                     {winsCount}
                                 </span>{' '}
                                 gagnant
-                            </p>
-                            <p
-                                className={css(STYLES.betDetailsItem)}
+                            </Text>
+                            <Text
+                                styles={STYLES.betDetailsItem}
                                 style={{ color: 'red' }}
                             >
                                 <span className={css(STYLES.betDetailsValue)}>
                                     {loosesCount}
                                 </span>{' '}
                                 perdant
-                            </p>
+                            </Text>
                         </View>
                         <View styles={STYLES.divider} />
                         <View>
-                            <p className={css(STYLES.betDetailsItem)}>
+                            <Text styles={STYLES.betDetailsItem}>
                                 Favoris:{' '}
                                 <span className={css(STYLES.betDetailsValue)}>
                                     {favoriteSport}
                                 </span>
-                            </p>
-                            <p className={css(STYLES.betDetailsItem)}>
+                            </Text>
+                            <Text styles={STYLES.betDetailsItem}>
                                 Cote moyenne:{' '}
                                 <span className={css(STYLES.betDetailsValue)}>
                                     {averageCote}
                                 </span>
-                            </p>
-                            <p className={css(STYLES.betDetailsItem)}>
+                            </Text>
+                            <Text styles={STYLES.betDetailsItem}>
                                 Derniere victoire:{' '}
                                 <span className={css(STYLES.betDetailsValue)}>
                                     {lastWin}
                                 </span>
-                            </p>
-                            <p className={css(STYLES.betDetailsItem)}>
+                            </Text>
+                            <Text styles={STYLES.betDetailsItem}>
                                 Derniere défaite:{' '}
                                 <span className={css(STYLES.betDetailsValue)}>
                                     {lastLoose}
                                 </span>
-                            </p>
+                            </Text>
                         </View>
                     </View>
                     <View styles={STYLES.STATS}>STATS</View>

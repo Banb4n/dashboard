@@ -1,8 +1,8 @@
 import BetTable from './BetTable';
-import BetCard from './BetCard';
 import Drawer from './Drawer';
 import FloatingButton from './FloatingButton';
 import Modal from './Modal';
 import View from './View';
+import Text from './Text';
 
-export { BetCard, BetTable, Drawer, FloatingButton, Modal, View };
+export { BetTable, Drawer, FloatingButton, Modal, View, Text };

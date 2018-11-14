@@ -7,7 +7,8 @@ import ControlPoint from '@material-ui/icons/ControlPoint';
 import BetTable from '../../styleguide/BetTable';
 import BetsHeader from './BetsHeader';
 import AppContainer from '../../../containers/AppContainer';
-import { BetCard, Modal, FloatingButton } from '../../styleguide';
+import { Modal, FloatingButton } from '../../styleguide';
+import BetCard from './BetCard';
 
 function Bets(props: { bets: Object }) {
     const { bets } = props;
@@ -55,7 +56,11 @@ function Bets(props: { bets: Object }) {
 
     const onClose = () => setCurrentBet(null);
 
-    const onOpenFormModal = () => setValue(initialFormValue);
+    const onOpenFormModal = (event: SyntheticEvent<*>) => {
+        event.preventDefault();
+        event.stopPropagation();
+        setValue(initialFormValue);
+    };
 
     const onCloseFormModal = () => setValue(null);
 

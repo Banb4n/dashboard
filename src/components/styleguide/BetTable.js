@@ -56,6 +56,7 @@ function BetTable(props: {
     const options = {
         filterType: 'checkbox',
         onRowClick: onClick,
+        selectableRows: false,
         // responsive: 'scroll',
         ...tableOptions
     };
