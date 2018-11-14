@@ -57,8 +57,6 @@ function Bets(props: { bets: Object }) {
     const onClose = () => setCurrentBet(null);
 
     const onOpenFormModal = (event: SyntheticEvent<*>) => {
-        event.preventDefault();
-        event.stopPropagation();
         setValue(initialFormValue);
     };
 

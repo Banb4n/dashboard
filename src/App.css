@@ -46,3 +46,10 @@
 .floating-button {
   z-index: 5;
 }
+
+.pie-chart-label {
+  font-size: 16 !important;
+  font-family: 'Open Sans' !important;
+  fill: #242623 !important;
+  margin: 5px;
+}

@@ -1,5 +1,6 @@
 /* @flow */
 import * as React from 'react';
+import { PieChart, Pie, Legend, Tooltip } from 'recharts';
 import { StyleSheet, css } from 'aphrodite-jss';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
@@ -31,7 +32,8 @@ const STYLES = StyleSheet.create({
         borderRadius: 2,
         padding: `${spacing.S100}px ${spacing.S100}px`,
         display: 'flex',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     betDetails: {
         flex: '0 1 45%',
@@ -82,6 +84,12 @@ const STYLES = StyleSheet.create({
         background: 'dimgrey',
         alignItems: 'center',
         textAlign: 'center'
+    },
+    pieChartContainer: {
+        flex: '0 1 45%',
+        display: 'flex',
+        justifyContent: 'flex-start',
+        alignItems: 'center'
     }
 });
 
@@ -95,6 +103,10 @@ function BetsHeader(props: { bets: Object }) {
     const averageCote = getAverageCote(bets);
     const lastWin = getLastWin(bets);
     const lastLoose = getLastLoose(bets);
+    const dataPieChart = [
+        { name: 'Perdus', value: loosesCount, fill: '#d14714' },
+        { name: 'Gagnés', value: winsCount, fill: '#16b20e' }
+    ];
 
     return (
         <div className="betsHeader">
@@ -159,7 +171,19 @@ function BetsHeader(props: { bets: Object }) {
                             </Text>
                         </View>
                     </View>
-                    <View styles={STYLES.STATS}>STATS</View>
+                    <View styles={STYLES.pieChartContainer}>
+                        <PieChart width={400} height={200}>
+                            <Pie
+                                data={dataPieChart}
+                                cx={200}
+                                cy={100}
+                                innerRadius={40}
+                                outerRadius={80}
+                                label
+                            />
+                            <Tooltip />
+                        </PieChart>
+                    </View>
                 </View>
             </View>
         </div>
