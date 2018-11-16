@@ -94,7 +94,7 @@ function NewProno(props: {}) {
             ...value,
             [name]: inputValue
         });
-        console.log({ inputValue, name });
+        console.log({ inputValue, name, value });
     };
 
     return (
