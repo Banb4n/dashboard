@@ -9,35 +9,12 @@ import BetsHeader from './BetsHeader';
 import AppContainer from '../../../containers/AppContainer';
 import { Modal, FloatingButton } from '../../styleguide';
 import BetCard from './BetCard';
+import NewProno from './NewProno';
 
 function Bets(props: { bets: Object }) {
     const { bets } = props;
     const [currentBet, setCurrentBet] = React.useState(null);
-    const [value, setValue] = React.useState(null);
-
-    const initialFormValue = ({
-        team1: '',
-        team2: '',
-        cote1: 0,
-        coteN: 0,
-        cote2: 0,
-        amount: 0,
-        choice: 0,
-        finish: false,
-        result: null,
-        profit: 0
-    }: {
-        team1: string,
-        team2: string,
-        cote1: number,
-        coteN: number,
-        cote2: number,
-        amount: number,
-        choice: number,
-        finish: boolean,
-        result: 'win' | 'loose' | null,
-        profit: number
-    });
+    const [addNewBetModal, setAddNewBetModal] = React.useState(false);
 
     const onBetClick = (
         rowData: Array<String>,
@@ -57,10 +34,10 @@ function Bets(props: { bets: Object }) {
     const onClose = () => setCurrentBet(null);
 
     const onOpenFormModal = (event: SyntheticEvent<*>) => {
-        setValue(initialFormValue);
+        setAddNewBetModal(true);
     };
 
-    const onCloseFormModal = () => setValue(null);
+    const onCloseFormModal = () => setAddNewBetModal(false);
 
     return (
         <div className="userProfile">
@@ -80,11 +57,9 @@ function Bets(props: { bets: Object }) {
                     </Modal>
                 </React.Fragment>
             )}
-            {value && (
-                <Modal isOpen={!!value} onClose={onCloseFormModal}>
-                    <Card>
-                        <h2>Nouveau prono</h2>
-                    </Card>
+            {addNewBetModal && (
+                <Modal isOpen={addNewBetModal} onClose={onCloseFormModal}>
+                    <NewProno />
                 </Modal>
             )}
         </div>
