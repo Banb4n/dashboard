@@ -13,6 +13,20 @@ class Database {
         });
     }
 
+    async getData(collection: string, uid: string) {
+        try {
+            const docRef = await this.database
+                .collection(collection)
+                .doc(uid)
+                .get();
+            console.log(`Get ${uid} in ${collection} :`, docRef);
+
+            return docRef.data();
+        } catch (error) {
+            console.error(`Error when reading ${uid}: `, error);
+        }
+    }
+
     async addData(collection: string, data: Object) {
         try {
             const docRef = await this.database.collection(collection).add(data);

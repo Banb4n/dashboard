@@ -39,6 +39,12 @@ function Bets(props: { bets: Object }) {
 
     const onCloseFormModal = () => setAddNewBetModal(false);
 
+    const onFocus = (event: SyntheticEvent) => {
+        console.log({ event });
+        event.preventDefault();
+        event.stopPropagation();
+    };
+
     return (
         <div className="userProfile">
             <FloatingButton onClick={onOpenFormModal}>
@@ -46,7 +52,14 @@ function Bets(props: { bets: Object }) {
                 Nouveau Pari
             </FloatingButton>
             <BetsHeader bets={bets} />
-            <BetTable bets={bets} onClick={onBetClick} tableOptions={null} />
+
+            <BetTable
+                bets={bets}
+                onClick={onBetClick}
+                onFocus={onFocus}
+                tableOptions={null}
+            />
+
             {currentBet && (
                 <React.Fragment>
                     <Modal isOpen={!!currentBet} onClose={onClose}>

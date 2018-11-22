@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { colors } from './css';
 
 const drawerWidth = 240;
 
@@ -46,6 +47,9 @@ const styles = theme => ({
         flexShrink: 0,
         whiteSpace: 'nowrap'
     },
+    drawerBG: {
+        background: colors.darkBlueGreen
+    },
     drawerOpen: {
         width: drawerWidth,
         transition: theme.transitions.create('width', {
@@ -74,6 +78,10 @@ const styles = theme => ({
     content: {
         flexGrow: 1,
         padding: theme.spacing.unit * 3
+    },
+    icon: {
+        color: colors.lightGrey,
+        marginRight: 4
     }
 });
 
@@ -95,7 +103,9 @@ class MiniDrawer extends React.Component<*, *> {
     };
 
     handleDrawerClose = () => {
-        this.setState({ open: false });
+        this.setState(state => ({
+            open: !state.open
+        }));
     };
 
     render() {
@@ -105,7 +115,7 @@ class MiniDrawer extends React.Component<*, *> {
         return (
             <div className={classes.root}>
                 <CssBaseline />
-                <AppBar
+                {/* <AppBar
                     position="fixed"
                     className={classNames(classes.appBar, {
                         [classes.appBarShift]: open
@@ -126,7 +136,7 @@ class MiniDrawer extends React.Component<*, *> {
                             {title}
                         </Typography>
                     </Toolbar>
-                </AppBar>
+                </AppBar> */}
                 <Drawer
                     variant="permanent"
                     className={classNames(classes.drawer, {
@@ -136,27 +146,24 @@ class MiniDrawer extends React.Component<*, *> {
                     classes={{
                         paper: classNames({
                             [classes.drawerOpen]: open,
-                            [classes.drawerClose]: !open
+                            [classes.drawerClose]: !open,
+                            [classes.drawerBG]: true
                         })
                     }}
                     open={open}
                 >
                     <div className={classes.toolbar}>
-                        <IconButton onClick={this.handleDrawerClose}>
-                            {theme.direction === 'rtl' ? (
-                                <ChevronRightIcon />
-                            ) : (
-                                <ChevronLeftIcon />
-                            )}
+                        <IconButton
+                            onClick={this.handleDrawerClose}
+                            className={classes.icon}
+                        >
+                            {!open ? <MenuIcon /> : <ChevronLeftIcon />}
                         </IconButton>
                     </div>
                     <Divider />
                     {navigation}
                 </Drawer>
-                <main className={classes.content}>
-                    <div className={classes.toolbar} />
-                    {children}
-                </main>
+                <main className={classes.content}>{children}</main>
             </div>
         );
     }

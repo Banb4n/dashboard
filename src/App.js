@@ -1,83 +1,57 @@
 /* @flow */
 import * as React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { StyleSheet } from 'aphrodite-jss';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'unstated';
 
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import AccountBox from '@material-ui/icons/AccountBox';
-import InsertChart from '@material-ui/icons/InsertChart';
-import AttachMoney from '@material-ui/icons/AttachMoney';
-import TableChart from '@material-ui/icons/TableChart';
-
-import { type BackendType } from './backend/Backend';
+import { type BackendType, type DatabaseType } from './backend/Backend';
 import './App.css';
-import { Drawer } from './components/styleguide';
+import { Drawer, View } from './components/styleguide';
+import { spacing } from './components/styleguide/css';
 import ROUTES from './routes';
+import NavList from './components/Nav/NavList';
 
-const ROUTES_ICONS = {
-    profil: {
-        icon: AccountBox
-    },
-    finance: {
-        icon: AttachMoney
-    },
-    bets: {
-        icon: TableChart
-    },
-    progress: {
-        icon: InsertChart
-    }
+const useQueryDB = (db: DatabaseType, collection: string, uid: string) => {
+    const [value, setValue] = React.useState('');
+
+    React.useEffect(async () => {
+        const response = await db.getData(collection, uid);
+        console.log(response);
+        setValue(response);
+    }, []);
+
+    return value;
 };
 
-function App(props: { backend: BackendType }) {
+const STYLES = StyleSheet.create({
+    pagesContainer: {
+        padding: `0 ${spacing.S300}px`,
+        textDecoration: 'none'
+    }
+});
+
+function App(appProps: { backend: BackendType }): React.Node {
     const {
         backend: { database }
-    } = props;
-    console.log({ database });
-    database.addData('users', {
-        country: 'FR',
-        displayName: 'Test ajout',
-        resume: {
-            invest: 0,
-            isPositive: false,
-            looses: 0,
-            profit: 0
-        }
-    });
-    const navItems = (
-        <List>
-            {ROUTES.map(route => {
-                const Icon = ROUTES_ICONS[route.name].icon;
-                console.log({ route, Icon });
-                return (
-                    <Link to={route.path}>
-                        <ListItem button>
-                            <ListItemIcon>
-                                <Icon />
-                            </ListItemIcon>
-                            <ListItemText primary={route.title} />
-                        </ListItem>
-                    </Link>
-                );
-            })}
-        </List>
-    );
+    } = appProps;
+    const user = useQueryDB(database, 'users', 'oUjln5CS4iSKvyJbQpVJ');
+    const bets = useQueryDB(database, 'bets', user.bets);
+    console.log({ user, bets });
 
     return (
         <div className="App">
             <Provider>
                 <Router>
-                    <Drawer title="Mon dashboard" navigation={navItems}>
-                        {ROUTES.map(route => (
-                            <Route
-                                exact
-                                path={route.path}
-                                component={route.component}
-                            />
-                        ))}
+                    <Drawer title="Mon dashboard" navigation={<NavList />}>
+                        <View styles={STYLES.pagesContainer}>
+                            {ROUTES.map(route => (
+                                <Route
+                                    exact
+                                    path={route.path}
+                                    component={route.component}
+                                />
+                            ))}
+                        </View>
                     </Drawer>
                 </Router>
             </Provider>
