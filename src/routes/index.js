@@ -1,6 +1,7 @@
 import UserProfile from '../components/pages/user/UserProfile';
 import Bets from '../components/pages/bets/Bets';
 import Finance from '../components/pages/finance/Finance';
+import Progress from '../components/pages/progress/Progress';
 
 const ROUTES = [
     {
@@ -8,12 +9,6 @@ const ROUTES = [
         name: 'profil',
         path: '/',
         component: UserProfile
-    },
-    {
-        title: 'Mes finances',
-        name: 'finance',
-        path: '/finance',
-        component: Finance
     },
     {
         title: 'Mes paris',
@@ -25,6 +20,12 @@ const ROUTES = [
         title: 'Ma progression',
         name: 'progress',
         path: '/progress',
+        component: Progress
+    },
+    {
+        title: 'Mes finances',
+        name: 'finance',
+        path: '/finance',
         component: Finance
     }
 ];

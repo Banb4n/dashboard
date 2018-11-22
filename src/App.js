@@ -43,7 +43,7 @@ function App(appProps: { backend: BackendType }): React.Node {
             <Provider>
                 <Router>
                     <Drawer title="Mon dashboard" navigation={<NavList />}>
-                        <View styles={STYLES.pagesContainer}>
+                        <View styles={[STYLES.pagesContainer]}>
                             {ROUTES.map(route => (
                                 <Route
                                     exact

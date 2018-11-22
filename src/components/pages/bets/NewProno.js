@@ -101,8 +101,8 @@ function NewProno(props: {}) {
         <Card className={css(STYLES.formContainer)}>
             <h2>Nouveau prono</h2>
             <form>
-                <View styles={STYLES.flexContainer}>
-                    <View styles={STYLES.input}>
+                <View styles={[STYLES.flexContainer]}>
+                    <View styles={[STYLES.input]}>
                         <TextField
                             id="team1"
                             name="team1"
@@ -112,7 +112,7 @@ function NewProno(props: {}) {
                             onChange={handleInputChange}
                         />
                     </View>
-                    <View styles={STYLES.input}>
+                    <View styles={[STYLES.input]}>
                         <TextField
                             id="team2"
                             name="team2"
@@ -124,7 +124,7 @@ function NewProno(props: {}) {
                     </View>
                 </View>
                 <View styles={STYLES.flexContainer}>
-                    <View styles={STYLES.input}>
+                    <View styles={[STYLES.input]}>
                         <TextField
                             id="cote"
                             name="cote"
@@ -135,7 +135,7 @@ function NewProno(props: {}) {
                             onChange={handleInputChange}
                         />
                     </View>
-                    <View styles={STYLES.input}>
+                    <View styles={[STYLES.input]}>
                         <TextField
                             id="amount"
                             name="amount"
@@ -148,7 +148,7 @@ function NewProno(props: {}) {
                     </View>
                 </View>
                 <View styles={STYLES.flexContainer}>
-                    <View styles={STYLES.input}>
+                    <View styles={[STYLES.input]}>
                         <TextField
                             select
                             value={value.choice}
@@ -172,7 +172,7 @@ function NewProno(props: {}) {
                             ))}
                         </TextField>
                     </View>
-                    <View styles={STYLES.input}>
+                    <View styles={[STYLES.input]}>
                         <TextField
                             id="result"
                             name="result"

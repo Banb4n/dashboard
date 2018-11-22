@@ -42,7 +42,7 @@ function BetCard(props: {
         <Card className={css(STYLES.cardContainer)}>
             <CardContent>
                 <BetCardHeader bet={bet} />
-                <View styles={STYLES.betCardContent}>
+                <View styles={[STYLES.betCardContent]}>
                     <Paper className={css(STYLES.chipsContainer)}>
                         <Chip
                             label={`

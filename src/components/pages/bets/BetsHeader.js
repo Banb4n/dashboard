@@ -1,10 +1,8 @@
 /* @flow */
 import * as React from 'react';
-import { PieChart, Pie, Legend, Tooltip } from 'recharts';
+import { PieChart, Pie, Tooltip } from 'recharts';
 import { StyleSheet, css } from 'aphrodite-jss';
-import Card from '@material-ui/core/Card';
-import Button from '@material-ui/core/Button';
-import { View, Text } from '../../styleguide';
+import { View, Text, PageHeader } from '../../styleguide';
 import { spacing } from '../../styleguide/css';
 import {
     getLoosesCount,
@@ -17,16 +15,6 @@ import {
 } from '../../../backend/utils';
 
 const STYLES = StyleSheet.create({
-    betsHeader: {
-        width: '100%',
-        padding: spacing.S100
-    },
-    pageTitle: {
-        fontSize: 32,
-        color: 'grey',
-        fontFamily: "'Open Sans', sans-serif",
-        textAlign: 'left'
-    },
     betsDetailsContainer: {
         margin: spacing.S100,
         borderRadius: 2,
@@ -104,16 +92,20 @@ function BetsHeader(props: { bets: Object }) {
     const lastWin = getLastWin(bets);
     const lastLoose = getLastLoose(bets);
     const dataPieChart = [
-        { name: 'Perdus', value: loosesCount, fill: '#d14714' },
-        { name: 'Gagnés', value: winsCount, fill: '#16b20e' }
+        {
+            dataKey: 'looses',
+            name: 'Perdus',
+            value: loosesCount,
+            fill: '#d14714'
+        },
+        { dataKey: 'wins', name: 'Gagnés', value: winsCount, fill: '#16b20e' }
     ];
 
     return (
         <div className="betsHeader">
-            <View styles={STYLES.betsHeader}>
-                <h1 className={css(STYLES.pageTitle)}>Mes paris</h1>
-                <View styles={STYLES.betsDetailsContainer}>
-                    <View styles={STYLES.betDetails}>
+            <PageHeader title="Mes paris">
+                <View styles={[STYLES.betsDetailsContainer]}>
+                    <View styles={[STYLES.betDetails]}>
                         <View>
                             <p className={css(STYLES.betDetailsHeader)}>
                                 Total :
@@ -143,7 +135,7 @@ function BetsHeader(props: { bets: Object }) {
                                 perdant
                             </Text>
                         </View>
-                        <View styles={STYLES.divider} />
+                        <View styles={[STYLES.divider]} />
                         <View>
                             <Text styles={STYLES.betDetailsItem}>
                                 Favoris:{' '}
@@ -171,7 +163,7 @@ function BetsHeader(props: { bets: Object }) {
                             </Text>
                         </View>
                     </View>
-                    <View styles={STYLES.pieChartContainer}>
+                    <View styles={[STYLES.pieChartContainer]}>
                         <PieChart width={400} height={200}>
                             <Pie
                                 data={dataPieChart}
@@ -185,7 +177,7 @@ function BetsHeader(props: { bets: Object }) {
                         </PieChart>
                     </View>
                 </View>
-            </View>
+            </PageHeader>
         </div>
     );
 }
