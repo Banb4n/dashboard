@@ -11,6 +11,15 @@ import getProfit from '../../../backend/utils/getProfit';
 import getLooses from '../../../backend/utils/getLooses';
 import { PageHeader, View } from '../../styleguide';
 import { spacing } from '../../styleguide/css';
+import {
+    getLoosesCount,
+    getWinsCount,
+    getBetsCount,
+    getFavoriteSport,
+    getAverageCote,
+    getLastWin,
+    getLastLoose
+} from '../../../backend/utils';
 
 const STYLES = StyleSheet.create({
     container: {
@@ -30,6 +39,14 @@ const STYLES = StyleSheet.create({
 function Progress(props: { user: Object }) {
     const { user } = props;
 
+    const loosesCount = getLoosesCount(user.bets);
+    const winsCount = getWinsCount(user.bets);
+    const betsCount = getBetsCount(user.bets);
+    const favoriteSport = getFavoriteSport(user.bets);
+    const averageCote = getAverageCote(user.bets);
+    const lastWin = getLastWin(user.bets);
+    const lastLoose = getLastLoose(user.bets);
+
     return (
         <div className="finance">
             <PageHeader title="Ma progression">
@@ -40,12 +57,9 @@ function Progress(props: { user: Object }) {
                                 Mes paris:
                             </Typography>
                             <ul>
-                                <li>
-                                    Montant investit:{' '}
-                                    {getTotalAmount(user.bets)} euros
-                                </li>
-                                <li>Profit: + {getProfit(user.bets)} euros</li>
-                                <li>Pertes: - {getLooses(user.bets)} euros</li>
+                                <li>Total: {betsCount}</li>
+                                <li>Gagné: {winsCount}</li>
+                                <li>Perdus: {loosesCount}</li>
                             </ul>
                         </CardContent>
                     </Card>

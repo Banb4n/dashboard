@@ -123,7 +123,7 @@ function NewProno(props: {}) {
                         />
                     </View>
                 </View>
-                <View styles={STYLES.flexContainer}>
+                <View styles={[STYLES.flexContainer]}>
                     <View styles={[STYLES.input]}>
                         <TextField
                             id="cote"
@@ -147,7 +147,7 @@ function NewProno(props: {}) {
                         />
                     </View>
                 </View>
-                <View styles={STYLES.flexContainer}>
+                <View styles={[STYLES.flexContainer]}>
                     <View styles={[STYLES.input]}>
                         <TextField
                             select

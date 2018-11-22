@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { StyleSheet, css, type SheetDefinitions } from 'aphrodite-jss';
 import View from './View';
-import { spacing } from './css';
+import { spacing, colors } from './css';
 
 const STYLES = StyleSheet.create({
     container: {
@@ -11,7 +11,7 @@ const STYLES = StyleSheet.create({
     },
     pageTitle: {
         fontSize: 32,
-        color: 'grey',
+        color: colors.pale,
         fontFamily: "'Open Sans', sans-serif",
         textAlign: 'left'
     }
