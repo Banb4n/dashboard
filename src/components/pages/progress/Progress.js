@@ -9,7 +9,7 @@ import AppContainer from '../../../containers/AppContainer';
 import getTotalAmount from '../../../backend/utils/getTotalAmount';
 import getProfit from '../../../backend/utils/getProfit';
 import getLooses from '../../../backend/utils/getLooses';
-import { PageHeader, View } from '../../styleguide';
+import { PageHeader, View, AreaCharts } from '../../styleguide';
 import { spacing } from '../../styleguide/css';
 import {
     getLoosesCount,
@@ -68,14 +68,15 @@ function Progress(props: { user: Object }) {
                             <Typography color="textSecondary" gutterBottom>
                                 Mes finances:
                             </Typography>{' '}
-                            <ul>
+                            {/* <ul>
                                 <li>
                                     Montant investit:{' '}
                                     {getTotalAmount(user.bets)} euros
                                 </li>
                                 <li>Profit: + {getProfit(user.bets)} euros</li>
                                 <li>Pertes: - {getLooses(user.bets)} euros</li>
-                            </ul>
+                            </ul> */}
+                            <AreaCharts />
                         </CardContent>
                     </Card>
                 </View>
