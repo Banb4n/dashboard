@@ -52,13 +52,13 @@ function Progress(props: { user: Object }) {
     for (let i = 0; i <= 4; i++) {
         const lastBet = user.bets[i];
         const betDetails = {
-            date: moment(lastBet.date).format('l'),
+            date: moment(lastBet.date).format('MMM D'),
             amount: lastBet.details.amount,
             win: lastBet.details.profit,
             loose:
                 lastBet.details.result === 'loose' ? lastBet.details.amount : 0
         };
-        lastFivesBets.push(betDetails);
+        lastFivesBets.unshift(betDetails);
     }
 
     return (

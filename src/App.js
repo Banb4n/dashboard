@@ -4,24 +4,16 @@ import { StyleSheet } from 'aphrodite-jss';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'unstated';
 
-import { type BackendType, type DatabaseType } from './backend/Backend';
+import Backend from './backend/Backend';
 import './App.css';
 import { Drawer, View } from './components/styleguide';
 import { spacing } from './components/styleguide/css';
 import ROUTES from './routes';
 import NavList from './components/Nav/NavList';
+import { useQuery } from './backend/hooks';
 
-const useQueryDB = (db: DatabaseType, collection: string, uid: string) => {
-    const [value, setValue] = React.useState('');
-
-    React.useEffect(async () => {
-        const response = await db.getData(collection, uid);
-        console.log(response);
-        setValue(response);
-    }, []);
-
-    return value;
-};
+// Initialze firebase
+const backend = new Backend();
 
 const STYLES = StyleSheet.create({
     pagesContainer: {
@@ -30,14 +22,11 @@ const STYLES = StyleSheet.create({
     }
 });
 
-function App(appProps: { backend: BackendType }): React.Node {
-    const {
-        backend: { database }
-    } = appProps;
-    const user = useQueryDB(database, 'users', 'oUjln5CS4iSKvyJbQpVJ');
-    const bets = useQueryDB(database, 'bets', user.bets);
-    console.log({ user, bets });
+function App(appProps: {}): React.Node {
+    const { database } = backend;
 
+    const user = useQuery(database, 'users', 'oUjln5CS4iSKvyJbQpVJ');
+    console.log({ user });
     return (
         <div className="App">
             <Provider>

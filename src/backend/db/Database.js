@@ -19,11 +19,12 @@ class Database {
                 .collection(collection)
                 .doc(uid)
                 .get();
-            console.log(`Get ${uid} in ${collection} :`, docRef);
+            console.info(`Get ${uid} in ${collection} :`, docRef);
 
             return docRef.data();
         } catch (error) {
-            console.error(`Error when reading ${uid}: `, error);
+            console.info(`Error when reading ${uid}: `, error);
+            throw new Error(error);
         }
     }
 
@@ -33,6 +34,7 @@ class Database {
             console.log('Document written with ID: ', docRef.id);
         } catch (error) {
             console.error('Error adding document: ', error);
+            throw new Error(error);
         }
     }
 }
