@@ -1,6 +1,7 @@
 /* @flow */
 import * as React from 'react';
 import { Subscribe } from 'unstated';
+import moment from 'moment';
 import { StyleSheet, css } from 'aphrodite-jss';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
@@ -47,6 +48,19 @@ function Progress(props: { user: Object }) {
     const lastWin = getLastWin(user.bets);
     const lastLoose = getLastLoose(user.bets);
 
+    const lastFivesBets = [];
+    for (let i = 0; i <= 4; i++) {
+        const lastBet = user.bets[i];
+        const betDetails = {
+            date: moment(lastBet.date).format('l'),
+            amount: lastBet.details.amount,
+            win: lastBet.details.profit,
+            loose:
+                lastBet.details.result === 'loose' ? lastBet.details.amount : 0
+        };
+        lastFivesBets.push(betDetails);
+    }
+
     return (
         <div className="finance">
             <PageHeader title="Ma progression">
@@ -66,17 +80,9 @@ function Progress(props: { user: Object }) {
                     <Card className={css(STYLES.cardHeader)}>
                         <CardContent>
                             <Typography color="textSecondary" gutterBottom>
-                                Mes finances:
+                                Mes 5 derniers paris:
                             </Typography>{' '}
-                            {/* <ul>
-                                <li>
-                                    Montant investit:{' '}
-                                    {getTotalAmount(user.bets)} euros
-                                </li>
-                                <li>Profit: + {getProfit(user.bets)} euros</li>
-                                <li>Pertes: - {getLooses(user.bets)} euros</li>
-                            </ul> */}
-                            <AreaCharts />
+                            <AreaCharts data={lastFivesBets} />
                         </CardContent>
                     </Card>
                 </View>
