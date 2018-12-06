@@ -18,7 +18,8 @@ const backend = new Backend();
 const STYLES = StyleSheet.create({
     pagesContainer: {
         padding: `0 ${spacing.S300}px`,
-        textDecoration: 'none'
+        textDecoration: 'none',
+        position: 'relative'
     }
 });
 
@@ -28,23 +29,21 @@ function App(appProps: {}): React.Node {
     const user = useQuery(database, 'users', 'oUjln5CS4iSKvyJbQpVJ');
     console.log({ user });
     return (
-        <div className="App">
-            <Provider>
-                <Router>
-                    <Drawer title="Mon dashboard" navigation={<NavList />}>
-                        <View styles={[STYLES.pagesContainer]}>
-                            {ROUTES.map(route => (
-                                <Route
-                                    exact
-                                    path={route.path}
-                                    component={route.component}
-                                />
-                            ))}
-                        </View>
-                    </Drawer>
-                </Router>
-            </Provider>
-        </div>
+        <Provider>
+            <Router>
+                <Drawer title="Mon dashboard" navigation={<NavList />}>
+                    <View styles={[STYLES.pagesContainer]}>
+                        {ROUTES.map(route => (
+                            <Route
+                                exact
+                                path={route.path}
+                                component={route.component}
+                            />
+                        ))}
+                    </View>
+                </Drawer>
+            </Router>
+        </Provider>
     );
 }
 
