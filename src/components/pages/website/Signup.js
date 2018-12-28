@@ -15,11 +15,6 @@ const STYLES = StyleSheet.create({
         maxHeight: '100vh',
         backgroundColor: colors.lightGrey
     },
-    title: {
-        display: 'flex',
-        justifyContent: 'center',
-        color: colors.green
-    },
     signupContainer: {
         width: '100%',
         height: '95vh',
@@ -69,11 +64,7 @@ function Signup(appProps: {}): React.Node {
 
     return (
         <View styles={[STYLES.container]}>
-            <NavBar>
-                <View styles={[STYLES.title]}>
-                    <h1>MyBets</h1>
-                </View>
-            </NavBar>
+            <NavBar />
             <View styles={[STYLES.signupContainer]}>
                 <View styles={[STYLES.formContainer]}>
                     <h1>Inscriptions</h1>

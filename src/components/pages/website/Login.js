@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { StyleSheet } from 'aphrodite-jss';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 import { View, NavBar } from '../../styleguide';
 import { colors, spacing } from '../../styleguide/css';
@@ -14,11 +15,6 @@ const STYLES = StyleSheet.create({
         maxHeight: '100vh',
         backgroundColor: colors.lightGrey
     },
-    title: {
-        display: 'flex',
-        justifyContent: 'center',
-        color: colors.green
-    },
     loginContainer: {
         width: '100%',
         height: '95vh',
@@ -27,63 +23,86 @@ const STYLES = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    formWrapper: {
+    formContainer: {
+        minWidth: '40vw',
+        minHeight: '30vh',
         padding: spacing.S300,
         backgroundColor: 'white'
+    },
+    formWrapper: {
+        display: 'flex',
+        width: '100%',
+        flexDirection: 'column'
+    },
+    errorWrapper: {
+        backgroundColor: colors.darkBlueGreen,
+        color: 'red',
+        margin: spacing.S200
     }
 });
 
 function Login(appProps: {}): React.Node {
     const [email, setEmail] = React.useState('');
     const [pwd, setPwd] = React.useState('');
+    const [error, setError] = React.useState('');
     const backend = React.useContext(BackendContext);
 
-    const onSubmit = event => {
+    const onSubmit = async event => {
         event.preventDefault();
         console.log({ backend });
-        backend.app
+        await backend.app
             .auth()
             .signInWithEmailAndPassword(email, pwd)
-            .catch(error => {
+            .then(data => console.log(data.user))
+            .catch(err => {
                 // Handle Errors here.
-                const errorCode = error.code;
-                const errorMessage = error.message;
+                const errorCode = err.code;
+                const errorMessage = err.message;
                 console.log({ errorCode, errorMessage });
+                setError(err.message);
                 // ...
             });
     };
 
     return (
         <View styles={[STYLES.container]}>
-            <NavBar>
-                <View styles={[STYLES.title]}>
-                    <h1>MyBets</h1>
-                </View>
-            </NavBar>
+            <NavBar />
             <View styles={[STYLES.loginContainer]}>
-                <View styles={[STYLES.formWrapper]}>
+                <View styles={[STYLES.formContainer]}>
                     <h1>Connexion</h1>
                     <form onSubmit={onSubmit}>
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={event => setEmail(event.target.value)}
-                            name="email"
-                        />
-                        <input
-                            type="passsword"
-                            value={pwd}
-                            onChange={event => setPwd(event.target.value)}
-                            name="pwd"
-                        />
-                        <Button
-                            aria-label="Connexion"
-                            variant="outlined"
-                            color="primary"
-                            type="submit"
-                        >
-                            Connexion
-                        </Button>
+                        {error ? (
+                            <View styles={[STYLES.errorWrapper]}>{error}</View>
+                        ) : null}
+                        <View styles={[STYLES.formWrapper]}>
+                            <TextField
+                                label="Email"
+                                type="email"
+                                name="email"
+                                autoComplete="email"
+                                margin="normal"
+                                variant="outlined"
+                                onChange={event => setEmail(event.target.value)}
+                                value={email}
+                            />
+                            <TextField
+                                label="Password"
+                                type="password"
+                                autoComplete="current-password"
+                                margin="normal"
+                                variant="outlined"
+                                value={pwd}
+                                onChange={event => setPwd(event.target.value)}
+                            />
+                            <Button
+                                aria-label="Confirmer"
+                                variant="outlined"
+                                color="primary"
+                                type="submit"
+                            >
+                                Confirmer
+                            </Button>
+                        </View>
                     </form>
                 </View>
             </View>

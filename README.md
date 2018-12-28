@@ -1,7 +1,6 @@
-This project was bootstrapped with : 
+This project is bootstrap with : 
   - [create-react-app](https://github.com/facebook/create-react-app)
   - [recharts](http://recharts.org/en-US/api/PieChart)
-  - [trianglify](https://trianglify.io/)
   - [momentjs](https://momentjs.com/docs/#/i18n/changing-locale/)
   - [material-ui](https://material-ui.com)
 

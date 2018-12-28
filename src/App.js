@@ -30,17 +30,30 @@ const STYLES = StyleSheet.create({
 
 function App(appProps: {}): React.Node {
     const { database, app } = backend;
-
+    const [currentUser, setCurrentUser] = React.useState({});
     const user = useQuery(database, 'users', 'oUjln5CS4iSKvyJbQpVJ');
-    console.log({ user, auth: app.auth().currentUser });
-    const currentUser = false;
+
+    React.useEffect(
+        () => {
+            if (backend.userIsLoggedIn) {
+                setCurrentUser(app.auth().currentUser);
+            }
+        },
+        [app.auth().currentUser]
+    );
+
+    console.log({
+        user,
+        auth: app.auth().currentUser,
+        userIsLoggedIn: backend.userIsLoggedIn
+    });
 
     return (
         <Provider>
             <BackendContext.Provider value={backend}>
                 <Router>
                     <Switch>
-                        {currentUser ? (
+                        {backend.userIsLoggedIn ? (
                             <Drawer
                                 title="Mon dashboard"
                                 navigation={<NavList />}
