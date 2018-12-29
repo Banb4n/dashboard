@@ -1,17 +1,17 @@
 /* @flow */
 import * as React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { BackendContext } from '../../backend/context';
 
-function PrivateRoute(routeProps: { component: React.Node, user: any }) {
-    const { component: Component, user, ...rest } = routeProps;
-    console.log({ user });
-    const isLoggedIn = user;
+function PrivateRoute(routeProps: { component: React.Node }) {
+    const { component: Component, ...rest } = routeProps;
+    const backend = React.useContext(BackendContext);
+    const { isLoggedIn } = backend;
     return (
         <Route
             {...rest}
-            render={props => {
-                console.log({ props, isLoggedIn });
-                return isLoggedIn ? (
+            render={props =>
+                isLoggedIn ? (
                     <Component {...props} />
                 ) : (
                     <Redirect
@@ -20,8 +20,8 @@ function PrivateRoute(routeProps: { component: React.Node, user: any }) {
                             state: { from: props.location }
                         }}
                     />
-                );
-            }}
+                )
+            }
         />
     );
 }

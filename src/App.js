@@ -13,7 +13,7 @@ import { Drawer, View } from './components/styleguide';
 import { spacing } from './components/styleguide/css';
 import ROUTES from './routes';
 import NavList from './components/Nav/NavList';
-import { useQuery } from './backend/hooks';
+import { useQuery, useCurrentUser } from './backend/hooks';
 import { HomePage, Login, Logout, Signup } from './components/pages/website';
 import NoMatch from './components/pages/errors/NoMatch';
 
@@ -30,22 +30,14 @@ const STYLES = StyleSheet.create({
 
 function App(appProps: {}): React.Node {
     const { database, app } = backend;
-    const [currentUser, setCurrentUser] = React.useState({});
+    const currentUser = useCurrentUser(app);
     const user = useQuery(database, 'users', 'oUjln5CS4iSKvyJbQpVJ');
-
-    React.useEffect(
-        () => {
-            if (backend.userIsLoggedIn) {
-                setCurrentUser(app.auth().currentUser);
-            }
-        },
-        [app.auth().currentUser]
-    );
 
     console.log({
         user,
         auth: app.auth().currentUser,
-        userIsLoggedIn: backend.userIsLoggedIn
+        userIsLoggedIn: backend.userIsLoggedIn,
+        currentUser
     });
 
     return (
@@ -64,7 +56,6 @@ function App(appProps: {}): React.Node {
                                             exact
                                             path={route.path}
                                             component={route.component}
-                                            user={currentUser}
                                         />
                                     ))}
                                 </View>
@@ -90,7 +81,6 @@ function App(appProps: {}): React.Node {
                                         exact
                                         path={route.path}
                                         component={route.component}
-                                        user={currentUser}
                                     />
                                 ))}
                             </React.Fragment>

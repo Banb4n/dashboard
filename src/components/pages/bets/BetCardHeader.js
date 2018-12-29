@@ -1,11 +1,7 @@
 /* @flow */
 import * as React from 'react';
 import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import { Divider } from '@material-ui/core';
 import { spacing } from '../../styleguide/css';
-import { Text } from '../../styleguide';
 import bgPattern from '../../../assets/imgs/bg1vs1.png';
 
 function BetCardHeader(props: {
