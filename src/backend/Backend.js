@@ -1,20 +1,15 @@
 /* @flow */
 import firebase from 'firebase';
-import Database, { type DatabaseType } from './db/Database';
+import Database from './db/Database';
+import type { AppType, DatabaseType } from './types';
 import config from '../config/config';
-
-export type App = any;
-export type BackendType = {
-    database: DatabaseType,
-    app: App
-};
 
 class Backend {
     // Firestore database
     database: DatabaseType;
 
     // Firebase app
-    app: App;
+    app: AppType;
 
     constructor() {
         this.app = firebase.initializeApp(config.firebase);

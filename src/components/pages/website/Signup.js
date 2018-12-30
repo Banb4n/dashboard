@@ -4,6 +4,7 @@ import { StyleSheet } from 'aphrodite-jss';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
+import { User } from '../../../backend/models';
 import { View, NavBar } from '../../styleguide';
 import { colors, spacing } from '../../styleguide/css';
 import { BackendContext } from '../../../backend/context';
@@ -41,25 +42,44 @@ const STYLES = StyleSheet.create({
     }
 });
 
-function Signup(appProps: {}): React.Node {
-    const [email, setEmail] = React.useState('');
-    const [pwd, setPwd] = React.useState('');
+function Signup(props: { history: Object }): React.Node {
+    const { history } = props;
     const [error, setError] = React.useState('');
     const backend = React.useContext(BackendContext);
 
-    const onSubmit = event => {
+    // Form values
+    const [email, setEmail] = React.useState('');
+    const [pwd, setPwd] = React.useState('');
+    const [displayName, setDisplayName] = React.useState('');
+    const [country, setCountry] = React.useState('');
+
+    const onSubmit = async event => {
         event.preventDefault();
-        backend.app
-            .auth()
-            .createUserWithEmailAndPassword(email, pwd)
-            .then(data => console.log({ data }))
-            .catch(err => {
-                // Handle Errors here.
-                const errorCode = err.code;
-                const errorMessage = err.message;
-                setError(errorMessage);
-                console.error({ errorCode, errorMessage });
+
+        try {
+            const auth = await backend.app
+                .auth()
+                .createUserWithEmailAndPassword(email, pwd);
+
+            const user = new User({
+                uid: auth.user.uid,
+                displayName,
+                country,
+                email,
+                bets: '',
+                bookmakers: []
             });
+
+            await backend.database.addData('users', user.serialize());
+        } catch (err) {
+            // Handle Errors here.
+            const errorCode = err.code;
+            const errorMessage = err.message;
+            setError(errorMessage);
+            console.error({ errorCode, errorMessage });
+        } finally {
+            history.push('/login');
+        }
     };
 
     return (
@@ -84,13 +104,37 @@ function Signup(appProps: {}): React.Node {
                                 value={email}
                             />
                             <TextField
-                                label="Password"
+                                label="Mot de passe"
                                 type="password"
                                 autoComplete="current-password"
                                 margin="normal"
                                 variant="outlined"
                                 value={pwd}
                                 onChange={event => setPwd(event.target.value)}
+                            />
+                            <TextField
+                                label="Pseudo"
+                                type="text"
+                                name="displayName"
+                                autoComplete="name"
+                                margin="normal"
+                                variant="outlined"
+                                onChange={event =>
+                                    setDisplayName(event.target.value)
+                                }
+                                value={displayName}
+                            />
+                            <TextField
+                                label="Pays"
+                                type="text"
+                                name="country"
+                                autoComplete="country"
+                                margin="normal"
+                                variant="outlined"
+                                onChange={event =>
+                                    setCountry(event.target.value)
+                                }
+                                value={country}
                             />
                             <Button
                                 aria-label="Confirmer"

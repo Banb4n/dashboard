@@ -1,5 +1,5 @@
 /* @flow */
-export type DatabaseType = any;
+import { type DatabaseType } from '../types';
 
 class Database {
     database: DatabaseType;

@@ -1,3 +1,4 @@
+/* @flow */
 import bets from './bets';
 
 const users = [

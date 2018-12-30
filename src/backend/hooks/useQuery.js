@@ -1,6 +1,6 @@
 /* @flow */
 import * as React from 'react';
-import { type DatabaseType } from '../db/Database';
+import { type DatabaseType } from '../types';
 
 function useQuery(db: DatabaseType, collection: string, uid: string) {
     const [value, setValue] = React.useState('');
