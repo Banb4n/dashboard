@@ -6,12 +6,11 @@ import { BackendContext } from '../../backend/context';
 function PrivateRoute(routeProps: { component: React.Node }) {
     const { component: Component, ...rest } = routeProps;
     const backend = React.useContext(BackendContext);
-    const { isLoggedIn } = backend;
     return (
         <Route
             {...rest}
             render={props =>
-                isLoggedIn ? (
+                backend.userIsLoggedIn ? (
                     <Component {...props} />
                 ) : (
                     <Redirect
