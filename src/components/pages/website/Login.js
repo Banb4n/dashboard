@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import { View, NavBar } from '../../styleguide';
 import { colors, spacing } from '../../styleguide/css';
 import { BackendContext } from '../../../backend/context';
+import useCurrentUser from '../../../backend/hooks/useCurrentUser';
 
 const STYLES = StyleSheet.create({
     container: {
@@ -41,11 +42,25 @@ const STYLES = StyleSheet.create({
     }
 });
 
-function Login(appProps: {}): React.Node {
+function Login(props: { history: any }): React.Node {
+    const { history } = props;
+    const backend = React.useContext(BackendContext);
+    const currentUser = useCurrentUser(backend.app);
+
     const [email, setEmail] = React.useState('');
     const [pwd, setPwd] = React.useState('');
     const [error, setError] = React.useState('');
-    const backend = React.useContext(BackendContext);
+
+    const redirectToApp = () => history.push('/bets');
+
+    React.useEffect(
+        () => {
+            if (currentUser) {
+                redirectToApp();
+            }
+        },
+        [currentUser]
+    );
 
     const onSubmit = async event => {
         event.preventDefault();
@@ -53,14 +68,19 @@ function Login(appProps: {}): React.Node {
         await backend.app
             .auth()
             .signInWithEmailAndPassword(email, pwd)
-            .then(data => console.log(data.user))
+            .then(data => {
+                console.info(
+                    `${data.user.uid} is correctly loggedin`,
+                    data.user
+                );
+                redirectToApp();
+            })
             .catch(err => {
                 // Handle Errors here.
                 const errorCode = err.code;
                 const errorMessage = err.message;
-                console.log({ errorCode, errorMessage });
                 setError(err.message);
-                // ...
+                console.error({ errorCode, errorMessage });
             });
     };
 

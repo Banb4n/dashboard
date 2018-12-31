@@ -9,6 +9,7 @@ import AccountBox from '@material-ui/icons/AccountBox';
 import InsertChart from '@material-ui/icons/InsertChart';
 import AttachMoney from '@material-ui/icons/AttachMoney';
 import TableChart from '@material-ui/icons/TableChart';
+import PowerSettingsNew from '@material-ui/icons/PowerSettingsNew';
 
 import { colors } from '../styleguide/css';
 
@@ -24,6 +25,9 @@ const ROUTES_ICONS = {
     },
     progress: {
         icon: InsertChart
+    },
+    logout: {
+        icon: PowerSettingsNew
     }
 };
 
@@ -36,8 +40,8 @@ const STYLES = StyleSheet.create({
     }
 });
 
-function NavItem(props: { route: Object }): React.Node {
-    const { route } = props;
+function NavItem(props: { route: Object, isActive: boolean }): React.Node {
+    const { route, isActive } = props;
 
     const [isHover, setHovered] = React.useState(false);
 
@@ -55,7 +59,7 @@ function NavItem(props: { route: Object }): React.Node {
                 <Icon
                     className={css(
                         STYLES.itemColor,
-                        isHover && STYLES.hoverColor
+                        (isHover || isActive) && STYLES.hoverColor
                     )}
                 />
             </ListItemIcon>
@@ -63,7 +67,7 @@ function NavItem(props: { route: Object }): React.Node {
                 <span
                     className={css(
                         STYLES.itemColor,
-                        isHover && STYLES.hoverColor
+                        (isHover || isActive) && STYLES.hoverColor
                     )}
                 >
                     {route.title}

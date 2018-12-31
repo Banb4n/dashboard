@@ -7,7 +7,7 @@ const ROUTES = [
     {
         title: 'Mon profil',
         name: 'profil',
-        path: '/',
+        path: '/profil',
         component: UserProfile
     },
     {

@@ -2,7 +2,11 @@
 import * as React from 'react';
 import { StyleSheet, css } from 'aphrodite-jss';
 import { Link } from 'react-router-dom';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import Button from '@material-ui/core/Button';
 
+import { useCurrentUser } from '../../backend/hooks';
+import { BackendContext } from '../../backend/context';
 import View from './View';
 import { colors, spacing } from './css';
 
@@ -34,6 +38,10 @@ const STYLES = StyleSheet.create({
             color: colors.green
         }
     },
+    buttonLink: {
+        textDecoration: 'none',
+        marginRight: spacing.S200
+    },
     title: {
         color: colors.green,
         textDecoration: 'none'
@@ -41,21 +49,39 @@ const STYLES = StyleSheet.create({
 });
 
 function NavBar(props: { children: React.Node }): React.Node {
+    const backend = React.useContext(BackendContext);
+    const currentUser = useCurrentUser(backend.app);
+
     return (
         <View styles={[STYLES.navbar]}>
             <Link to="/" className={css(STYLES.title)}>
                 <h1>MyBets</h1>
             </Link>
             <View styles={[STYLES.links]}>
-                <Link to="/login" className={css(STYLES.link)}>
-                    Connexion
-                </Link>
-                <Link to="/signup" className={css(STYLES.link)}>
-                    Inscription
-                </Link>
-                <Link to="/logout" className={css(STYLES.link)}>
-                    Deconnexion
-                </Link>
+                {!currentUser ? (
+                    <React.Fragment>
+                        <Link to="/login" className={css(STYLES.link)}>
+                            Connexion
+                        </Link>
+                        <Link to="/signup" className={css(STYLES.link)}>
+                            Inscription
+                        </Link>
+                    </React.Fragment>
+                ) : (
+                    <Link to="/bets" className={css(STYLES.buttonLink)}>
+                        <Button
+                            variant="outlined"
+                            color="primary"
+                            className={css(STYLES.buttonLink)}
+                        >
+                            <AccountCircle />
+                            Mon dashboard
+                        </Button>
+                    </Link>
+                    // <Link to="/logout" className={css(STYLES.link)}>
+                    //     Deconnexion
+                    // </Link>
+                )}
             </View>
         </View>
     );

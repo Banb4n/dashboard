@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { BackendContext } from '../../backend/context';
+import AppLayout from './AppLayout';
 
 function PrivateRoute(routeProps: { component: React.Node }) {
     const { component: Component, ...rest } = routeProps;
@@ -11,7 +12,9 @@ function PrivateRoute(routeProps: { component: React.Node }) {
             {...rest}
             render={props =>
                 backend.userIsLoggedIn ? (
-                    <Component {...props} />
+                    <AppLayout>
+                        <Component {...props} />
+                    </AppLayout>
                 ) : (
                     <Redirect
                         to={{

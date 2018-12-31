@@ -82,6 +82,12 @@ const styles = theme => ({
     icon: {
         color: colors.lightGrey,
         marginRight: 4
+    },
+    bottomList: {
+        flex: 1,
+        display: 'flex',
+        justifyContent: 'flex-end',
+        flexDirection: 'column'
     }
 });
 
@@ -90,6 +96,7 @@ class MiniDrawer extends React.Component<*, *> {
         classes: Object,
         theme: Object,
         navigation: React.Node,
+        bottomList: React.Node,
         children: React.Node,
         title: string
     };
@@ -109,7 +116,14 @@ class MiniDrawer extends React.Component<*, *> {
     };
 
     render() {
-        const { classes, theme, navigation, children, title } = this.props;
+        const {
+            classes,
+            theme,
+            navigation,
+            bottomList,
+            children,
+            title
+        } = this.props;
         const { open } = this.state;
 
         return (
@@ -162,6 +176,9 @@ class MiniDrawer extends React.Component<*, *> {
                     </div>
                     <Divider />
                     {navigation}
+                    <div className={classNames(classes.bottomList)}>
+                        {bottomList}
+                    </div>
                 </Drawer>
                 <main className={classes.content}>{children}</main>
             </div>

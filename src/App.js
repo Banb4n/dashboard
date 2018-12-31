@@ -3,7 +3,6 @@ import * as React from 'react';
 import { StyleSheet } from 'aphrodite-jss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'unstated';
-// import { app } from 'firebase-admin';
 
 import Backend from './backend/Backend';
 import { BackendContext } from './backend/context';
@@ -13,6 +12,7 @@ import { Drawer, View } from './components/styleguide';
 import { spacing } from './components/styleguide/css';
 import ROUTES from './routes';
 import NavList from './components/Nav/NavList';
+import BottomNavList from './components/Nav/BottomNavList';
 import { useQuery, useCurrentUser } from './backend/hooks';
 import { HomePage, Login, Logout, Signup } from './components/pages/website';
 import NoMatch from './components/pages/errors/NoMatch';
@@ -31,12 +31,27 @@ const STYLES = StyleSheet.create({
 function App(appProps: {}): React.Node {
     const { database, app } = backend;
     const currentUser = useCurrentUser(app);
-    const user = useQuery(database, 'users', 'oUjln5CS4iSKvyJbQpVJ');
+    const [userLoggedIn, setUserLoggedIn] = React.useState(currentUser);
+
+    React.useEffect(
+        () => {
+            if (currentUser) {
+                setUserLoggedIn(currentUser);
+            }
+        },
+        [currentUser]
+    );
+
+    let user;
+    if (currentUser) {
+        console.log({ currentUser });
+        user = useQuery(database, 'users', currentUser.uid);
+    }
 
     console.log({
-        user,
+        fetchedUser: user || {},
         auth: app.auth().currentUser,
-        userIsLoggedIn: backend.userIsLoggedIn,
+        userIsLoggedIn: userLoggedIn,
         currentUser
     });
 
@@ -45,46 +60,17 @@ function App(appProps: {}): React.Node {
             <BackendContext.Provider value={backend}>
                 <Router>
                     <Switch>
-                        {backend.userIsLoggedIn ? (
-                            <Drawer
-                                title="Mon dashboard"
-                                navigation={<NavList />}
-                            >
-                                <View styles={[STYLES.pagesContainer]}>
-                                    {ROUTES.map(route => (
-                                        <PrivateRoute
-                                            exact
-                                            path={route.path}
-                                            component={route.component}
-                                        />
-                                    ))}
-                                </View>
-                            </Drawer>
-                        ) : (
-                            <React.Fragment>
-                                <Route exact path="/" component={HomePage} />
-                                <Route exact path="/login" component={Login} />
-                                <Route
-                                    exact
-                                    path="/signUp"
-                                    component={Signup}
-                                />
-                                <Route
-                                    exact
-                                    path="/logout"
-                                    component={Logout}
-                                />
-                                {ROUTES.filter(
-                                    route => route.name !== 'profil'
-                                ).map(route => (
-                                    <PrivateRoute
-                                        exact
-                                        path={route.path}
-                                        component={route.component}
-                                    />
-                                ))}
-                            </React.Fragment>
-                        )}
+                        <Route path="/" exact component={HomePage} />
+                        <Route exact path="/signup" component={Signup} />
+                        <Route path="/login" exact component={Login} />
+                        <Route path="/logout" exact component={Logout} />
+                        {ROUTES.map(route => (
+                            <PrivateRoute
+                                exact
+                                path={route.path}
+                                component={route.component}
+                            />
+                        ))}
                         {/* No match route */}
                         <Route component={NoMatch} />
                     </Switch>
