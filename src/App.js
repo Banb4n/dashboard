@@ -31,27 +31,29 @@ const STYLES = StyleSheet.create({
 function App(appProps: {}): React.Node {
     const { database, app } = backend;
     const currentUser = useCurrentUser(app);
-    const [userLoggedIn, setUserLoggedIn] = React.useState(currentUser);
+    const [authUser, setUserAuthUser] = React.useState(currentUser);
+    const [user, setUser] = React.useState(null);
 
     React.useEffect(
         () => {
             if (currentUser) {
-                setUserLoggedIn(currentUser);
+                setUserAuthUser(currentUser);
             }
         },
         [currentUser]
     );
 
-    let user;
-    if (currentUser) {
+    if (authUser) {
         console.log({ currentUser });
-        user = useQuery(database, 'users', currentUser.uid);
+        const fetchedUser = useQuery(database, 'users', authUser.uid);
+        setUser(fetchedUser);
+        console.log({ fetchedUser });
     }
 
     console.log({
         fetchedUser: user || {},
         auth: app.auth().currentUser,
-        userIsLoggedIn: userLoggedIn,
+        userIsLoggedIn: authUser,
         currentUser
     });
 

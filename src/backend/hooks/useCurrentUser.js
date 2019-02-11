@@ -6,7 +6,11 @@ function useCurrentUser(app: any) {
 
     React.useEffect(
         () => {
-            console.info(app.auth().currentUser);
+            console.log({
+                current: app.auth().currentUser,
+                app,
+                auth: app.auth()
+            });
             setUser(app.auth().currentUser);
         },
         [app.auth().currentUser]
